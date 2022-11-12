@@ -7,6 +7,7 @@ import java.util.Random;
 
 public class TestUtils {
     public static final int ITERATIONS = 1000;
+    public static final int MAX_AGE = 100;
     static Random random = new Random();
 
     public static Location getRandomLocation() {

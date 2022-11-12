@@ -15,7 +15,7 @@ class CarTest {
     @RepeatedTest(TestUtils.ITERATIONS)
     void badInitTest() {
         int energy = TestUtils.getRandomEnergy();
-        if (energy <= 0 || energy > 100) {
+        if (energy <= Utils.MIN_ENERGY_VALUE || energy > Utils.MAX_ENERGY_VALUE) {
             assertThrows(IllegalArgumentException.class, () -> {
                 new ElectricCar(TestUtils.getRandomLocation(), energy);
                 new PetrolCar(TestUtils.getRandomLocation(), energy);

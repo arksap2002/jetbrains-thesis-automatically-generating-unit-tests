@@ -48,7 +48,7 @@ public class Person {
         car.driveTo(destinationLocation);
     }
 
-    private void addEnergy() {
+    protected void addEnergy() {
         Location destination;
         if (car instanceof ElectricCar) {
             ChargingStation chargingStation = StationsPool.getInstance().getClosestChargingStation(car);
@@ -57,9 +57,9 @@ public class Person {
             GasStation gasStation = StationsPool.getInstance().getClosestGasStation(car);
             destination = gasStation.getLocation();
         }
+        car.refuel();
         System.out.println(Utils.DRIVE_MESSAGE(destination, car.getLocation(), car.getEnergyValue()));
         car.driveTo(destination);
-        car.refuel();
     }
 
     public void changeCar(Car car) {
