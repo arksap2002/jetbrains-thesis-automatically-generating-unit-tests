@@ -24,4 +24,8 @@
 ## Testing
 ### Regression tests
 ### Unit tests
+#### Car test
+- `badInitTest` -
+- `driveToTest` - 
+- `refuelTest` - 
 ### Class integration tests

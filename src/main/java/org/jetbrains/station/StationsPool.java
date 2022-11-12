@@ -22,21 +22,21 @@ public class StationsPool {
 
     private StationsPool() {
         // Add gas stations
-        gasStations.add(new GasStation(1, new Location(10, 10)));
-        gasStations.add(new GasStation(2, new Location(10, 25)));
-        gasStations.add(new GasStation(3, new Location(10, 45)));
-        gasStations.add(new GasStation(4, new Location(10, 67)));
-        gasStations.add(new GasStation(5, new Location(10, 77)));
-        gasStations.add(new GasStation(6, new Location(10, 89)));
-        gasStations.add(new GasStation(7, new Location(10, 97)));
+        gasStations.add(new GasStation(1, new Location(0, 10)));
+        gasStations.add(new GasStation(2, new Location(0, 25)));
+        gasStations.add(new GasStation(3, new Location(0, 45)));
+        gasStations.add(new GasStation(4, new Location(0, 67)));
+        gasStations.add(new GasStation(5, new Location(0, 77)));
+        gasStations.add(new GasStation(6, new Location(0, 89)));
+        gasStations.add(new GasStation(7, new Location(0, 97)));
         // Add charging stations
-        chargingStations.add(new ChargingStation(8, new Location(10, 15)));
-        chargingStations.add(new ChargingStation(9, new Location(10, 35)));
-        chargingStations.add(new ChargingStation(10, new Location(10, 47)));
-        chargingStations.add(new ChargingStation(11, new Location(10, 59)));
-        chargingStations.add(new ChargingStation(12, new Location(10, 70)));
-        chargingStations.add(new ChargingStation(13, new Location(10, 86)));
-        chargingStations.add(new ChargingStation(14, new Location(10, 96)));
+        chargingStations.add(new ChargingStation(8, new Location(0, 15)));
+        chargingStations.add(new ChargingStation(9, new Location(0, 35)));
+        chargingStations.add(new ChargingStation(10, new Location(0, 47)));
+        chargingStations.add(new ChargingStation(11, new Location(0, 59)));
+        chargingStations.add(new ChargingStation(12, new Location(0, 70)));
+        chargingStations.add(new ChargingStation(13, new Location(0, 86)));
+        chargingStations.add(new ChargingStation(14, new Location(0, 96)));
     }
 
     public ChargingStation getClosestChargingStation(Car car) {
@@ -48,7 +48,7 @@ public class StationsPool {
     }
 
     private Station getClosestStation(Car car, List<Station> stations) {
-        if (stations.size() == 0) {
+        if (stations.isEmpty()) {
             throw new IllegalArgumentException(Utils.EXCEPTION_NO_STATIONS);
         }
         double minDestination = car.getLocation().distanceTo(stations.get(0).getLocation());

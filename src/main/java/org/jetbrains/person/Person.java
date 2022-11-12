@@ -6,6 +6,7 @@ import org.jetbrains.location.Location;
 import org.jetbrains.station.ChargingStation;
 import org.jetbrains.station.GasStation;
 import org.jetbrains.station.StationsPool;
+import org.jetbrains.utils.Utils;
 
 public class Person {
 
@@ -21,7 +22,7 @@ public class Person {
         this.homeLocation = homeLocation;
         this.workLocation = workLocation;
         if (car == null) {
-            throw new IllegalArgumentException("Car is empty");
+            throw new IllegalArgumentException(Utils.EXCEPTION_EMPTY_CAR);
         }
         this.car = car;
     }
@@ -35,15 +36,15 @@ public class Person {
     }
 
     private void drive(Location destinationLocation) {
-        if (this.age < 18) {
-            System.out.println("This person is too young to drive!");
+        if (this.age < Utils.MIN_AGE_FOR_DRIVING) {
+            System.out.println(Utils.TOO_YOUNG_TO_DRIVE_MESSAGE);
             return;
         }
         if (car.needsEnergy(destinationLocation)) {
-            System.out.println("Needs energy");
+            System.out.println(Utils.NEEDS_ENERGY_MESSAGE);
             addEnergy();
         }
-        System.out.println("Drive to " + destinationLocation + ". Current location " + car.getLocation() + ". Energy " + car.getEnergyValue());
+        System.out.println(Utils.DRIVE_MESSAGE(destinationLocation, car.getLocation(), car.getEnergyValue()));
         car.driveTo(destinationLocation);
     }
 
@@ -56,7 +57,7 @@ public class Person {
             GasStation gasStation = StationsPool.getInstance().getClosestGasStation(car);
             destination = gasStation.getLocation();
         }
-        System.out.println("Drive to " + destination + ". Current location " + car.getLocation() + ". Energy " + car.getEnergyValue());
+        System.out.println(Utils.DRIVE_MESSAGE(destination, car.getLocation(), car.getEnergyValue()));
         car.driveTo(destination);
         car.refuel();
     }
