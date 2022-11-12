@@ -1,10 +1,12 @@
 package org.jetbrains.car;
 
-public class ElectricCar extends Car{
+import org.jetbrains.location.Location;
+import org.jetbrains.utils.Utils;
 
-    public ElectricCar(double location, double energyUsageRate) {
-        super(location,energyUsageRate);
-        energyThreshold=40;
+public class ElectricCar extends Car {
+
+    public ElectricCar(Location location, double energyUsageRate) {
+        super(location, energyUsageRate);
+        energyThreshold = Utils.ELECTRiC_CAR_ENERGY_THRESHOLD;
     }
-
 }

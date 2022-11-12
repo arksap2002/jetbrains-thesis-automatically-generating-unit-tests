@@ -1,43 +1,48 @@
 package org.jetbrains.car;
 
+import org.jetbrains.location.Location;
+import org.jetbrains.utils.Utils;
+
 public abstract class Car {
 
-    protected double location;
-    private Energy energy;
+    protected Location location;
+    private final Energy energy;
 
-    private double energyUsageRate;
+    private final double energyUsageRate;
 
     protected int energyThreshold;
 
 
-    public Car(double location, double energyUsageRate) {
+    public Car(Location location, double energyUsageRate) {
         this.location = location;
-
-        if(energyUsageRate <= 0){
-            throw new IllegalArgumentException("energy usage rate should be higher than 0.");
+        if (energyUsageRate <= Utils.MIN_ENERGY_VALUE) {
+            throw new IllegalArgumentException(Utils.EXCEPTION_TOO_LOW_ENERGY);
+        }
+        if (energyUsageRate > Utils.MAX_ENERGY_VALUE) {
+            throw new IllegalArgumentException(Utils.EXCEPTION_TOO_HIGH_ENERGY);
         }
         this.energyUsageRate = energyUsageRate;
         energy = new Energy();
     }
 
-    public boolean needsEnergy(double destination) {
-        double distance = Math.abs(destination-this.location);
+    public boolean needsEnergy(Location destination) {
+        double distance = destination.distanceTo(this.location);
         double estimatedUsage = distance * energyUsageRate;
         return (this.energy.getEnergy() - estimatedUsage <= this.energyThreshold);
     }
 
-    public void driveTo(double destination){
-        double distance = destination-this.location;
-        this.energy.reduceEnergy(distance*energyUsageRate);
+    public void driveTo(Location destination) {
+        double distance = destination.distanceTo(this.location);
+        this.energy.reduceEnergy(distance * energyUsageRate);
         this.location = destination;
     }
 
     public void refuel() {
-        System.out.println("Refueling");
+        System.out.println(Utils.REFUELING_MESSAGE);
         this.energy.recharge();
     }
 
-    public double getLocation() {
+    public Location getLocation() {
         return location;
     }
 
@@ -45,23 +50,24 @@ public abstract class Car {
         return (this.energy.getEnergy());
     }
 
-    protected class Energy{
+    protected static class Energy {
+
         private double energy;
 
         public Energy() {
-            energy = 100;
+            energy = Utils.MAX_ENERGY_VALUE;
         }
 
-        public void reduceEnergy(double value){
-            energy-=value;
+        public void reduceEnergy(double value) {
+            energy -= value;
         }
 
         public double getEnergy() {
             return energy++;
         }
 
-        public void recharge(){
-            energy = 100;
+        public void recharge() {
+            energy = Utils.MAX_ENERGY_VALUE;
         }
     }
 }
