@@ -25,7 +25,8 @@
 - Fixed a bug in the `addEnergy` method: `refuel` must be before the driving to destination
   - Covered by tests
 ## Testing
-I've corrected this code, I'm not sure what it was supposed to be, I still don't like some moments in the code. At a minimum, I would not fill in arrays of stations in the code itself. It seems to me that this should happen in tests, each different situation has its own set of points for stations. I would also implement this class a little differently - just 2 arrays of data that can be filled in from tests during init. It would also be logical to create a class “World” or something similar, in which persons, stations and cars would be stored, for example, because I don't like that inside the person there is work with “StationsPool”. This is a more understandable implementation, as well as more convenient for testing.
+I've corrected this code, I'm not sure what it was supposed to be, I still don't like some moments in the code. At a minimum, I would not fill in arrays of stations in the code itself. It seems to me that this should happen in tests, each different situation has its own set of points for stations. I would also implement this class a little differently - just 2 arrays of data that can be filled in from tests during init. It would also be logical to create a class “World” or something similar, in which persons, stations and cars would be stored, for example, because I don't like that inside the person there is work with “StationsPool”. This is a more understandable implementation, as well as more convenient for testing.\
+I like to generate random datasets for testing in order to minimize matches and increase the quality of verification.
 ### Car test
 - `badInitTest` - testing the `badInit` method. Checking all throws
 - `driveToTest` - testing the `driveTo` method. Checking the car's location and energy value
